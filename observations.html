@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Observations - Supernova Journal</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 3;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #0b0220, #1a044e);
+      color: #ffffff;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #1c084e;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .logo {
+      position: relative;
+      padding-left: 80px; /* spazio per cerchio con stella */
+      font-weight: 900;
+      font-size: 3.5rem;
+      background: linear-gradient(90deg, #2a33ff, #7a33ff, #ff7f50, #ff6347);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.2rem;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .subtitle {
+      font-size: 1rem;
+      color: white;
+      margin-top: 0.2rem;
+      margin-left: 0;
+    }
+    .icon-star {
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #ff7f50, #ff6347);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px #ff6f3f80;
+    }
+    .icon-star svg {
+      width: 30px;
+      height: 30px;
+      fill: white;
+    }
+    nav a {
+      margin: 0 0.5rem;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      background: #3e1f94;
+      border-radius: 8px;
+      transition: background 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    nav a:hover {
+      background: #5c2bcd;
+    }
+    main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+    main h1 {
+      font-size: 4rem;
+      color: white;
+      margin-bottom: 0.5rem;
+      user-select: none;
+    }
+    main p {
+      font-size: 1.3rem;
+      color: white;
+      opacity: 0.8;
+      user-select: none;
+    }
+    footer {
+      background:#1c084e;
+      color:#fff;
+      text-align:center;
+      padding:1rem 0;
+      font-size:0.9rem;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:8px;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      SUPERNOVA
+      <div class="subtitle">Personal Astronomy & Astrophysics Journal</div>
+      <div class="icon-star">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 2l2.39 7.26H22l-5.8 4.22L18.19 22 12 17.77 5.81 22l1.99-8.52L2 9.26h7.61z"/>
+        </svg>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="journal.html"><i class="fas fa-book"></i> Journal</a>
+      <a href="observations.html"><i class="fas fa-eye"></i> Observations</a>
+      <a href="research.html"><i class="fas fa-flask"></i> Research</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Observational Astronomy</h1>
+    <p>Coming soon - detailed observing logs and equipment reviews.</p>
+  </main>
+
+  <footer>
+    © 2025 SUPERNOVA - Personal Astronomy Journal | Exploring the Universe One Discovery at a Time.
+    <i class="fas fa-satellite" aria-hidden="true" style="font-size:1.2rem; color:#ff7f50;"></i>
+  </footer>
+</body>
+</html>

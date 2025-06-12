@@ -1,0 +1,246 @@
+<!-- -*- mode: html -*- -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Supernova Journal - Articles</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Riporto tutto il CSS della homepage, per mantenere lo stile identico */
+    body {
+      margin: 3;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #0b0220, #1a044e);
+      color: #ffffff;
+      position: relative;
+    }
+    header {
+      background: #1c084e;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      position: relative;
+      padding-left: 80px;
+      font-weight: 900;
+      font-size: 3.5rem;
+      background: linear-gradient(90deg, #2a33ff, #7a33ff, #ff7f50, #ff6347);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.2rem;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .subtitle {
+      font-size: 1rem;
+      color: white;
+      margin-top: 0.2rem;
+      margin-left: 0;
+    }
+    .icon-star {
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #ff7f50, #ff6347);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px #ff6f3f80;
+    }
+    .icon-star svg {
+      width: 30px;
+      height: 30px;
+      fill: white;
+    }
+    nav a {
+      margin: 0 0.5rem;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      background: #3e1f94;
+      border-radius: 8px;
+      transition: background 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    nav a:hover {
+      background: #5c2bcd;
+    }
+    /* Barra di ricerca */
+    .search-bar {
+      max-width: 600px;
+      margin: 2rem auto 3rem;
+      display: flex;
+      justify-content: center;
+    }
+    .search-bar input[type="text"] {
+      flex-grow: 1;
+      padding: 0.7rem 1rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px 0 0 8px;
+      outline: none;
+    }
+    .search-bar button {
+      background: #ff6b3d;
+      border: none;
+      color: white;
+      font-weight: bold;
+      padding: 0 1.5rem;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .search-bar button:hover {
+      background: #ff8b5c;
+    }
+    .section {
+      padding: 0 2rem 3rem;
+    }
+    .cards {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .card {
+      background: #1e1a3d;
+      border-radius: 10px;
+      max-width: 320px;
+      overflow: hidden;
+      cursor: default;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      width: 100%;
+      display: block;
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .card h3 {
+      margin: 0.5rem 0;
+      font-size: 1.2rem;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tags span {
+      background: #4e2c88;
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+      font-size: 0.8rem;
+    }
+    /* Footer identico */
+    footer {
+      background:#1c084e; 
+      color:#fff; 
+      text-align:center; 
+      padding:1rem 0; 
+      font-size:0.9rem; 
+      display:flex; 
+      justify-content:center; 
+      align-items:center; 
+      gap:8px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      SUPERNOVA
+      <div class="subtitle">Personal Astronomy & Astrophysics Journal</div>
+      <div class="icon-star">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 2l2.39 7.26H22l-5.8 4.22L18.19 22 12 17.77 5.81 22l1.99-8.52L2 9.26h7.61z"/>
+        </svg>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="journal.html"><i class="fas fa-book"></i> Journal</a>
+      <a href="observations.html"><i class="fas fa-eye"></i> Observations</a>
+      <a href="research.html"><i class="fas fa-flask"></i> Research</a>
+    </nav>
+  </header>
+
+  <section class="section">
+    <div class="search-bar" role="search">
+      <input type="text" id="searchInput" placeholder="Search articles by keywords..." aria-label="Search articles" />
+      <button type="button" onclick="filterArticles()"><i class="fas fa-search"></i> Search</button>
+    </div>
+
+    <div class="cards" id="articlesContainer">
+      <!-- Esempio articoli, stesso formato della homepage -->
+      <div class="card" data-tags="nebula star formation winter objects">
+        <img src="orion.jpg" alt="Orion Nebula" />
+        <div class="card-content">
+          <h3>Observing the Orion Nebula (M42)</h3>
+          <p>Tonight’s observation session revealed incredible detail in the Orion Nebula using my 8-inch telescope...</p>
+          <div class="tags">
+            <span>nebula</span><span>star formation</span><span>winter objects</span>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-tags="black holes general relativity quantum mechanics">
+        <img src="blackhole.jpg" alt="Black Hole" />
+        <div class="card-content">
+          <h3>Understanding Black Hole Physics</h3>
+          <p>Exploring the mathematics of event horizons and the information paradox. Notes on Stephen Hawking’s work...</p>
+          <div class="tags">
+            <span>black holes</span><span>general relativity</span><span>quantum mechanics</span>
+          </div>
+        </div>
+      </div>
+      <!-- Puoi aggiungere qui altri articoli nello stesso formato con data-tags -->
+    </div>
+  </section>
+
+  <footer>
+    © 2025 SUPERNOVA - Personal Astronomy Journal | Exploring the Universe One Discovery at a Time.
+    <i class="fas fa-satellite" aria-hidden="true" style="font-size:1.2rem; color:#ff7f50;"></i>
+  </footer>
+
+  <script>
+    function filterArticles() {
+      const input = document.getElementById('searchInput').value.toLowerCase().trim();
+      const articles = document.querySelectorAll('#articlesContainer .card');
+      if(!input) {
+        // Se input vuoto mostra tutti
+        articles.forEach(article => article.style.display = 'block');
+        return;
+      }
+      articles.forEach(article => {
+        const tags = article.getAttribute('data-tags').toLowerCase();
+        const title = article.querySelector('h3').textContent.toLowerCase();
+        const desc = article.querySelector('p').textContent.toLowerCase();
+        // Controlla se input è contenuto in tags, titolo o descrizione
+        if(tags.includes(input) || title.includes(input) || desc.includes(input)) {
+          article.style.display = 'block';
+        } else {
+          article.style.display = 'none';
+        }
+      });
+    }
+
+    // Permette anche ricerca "live" mentre scrivi (opzionale)
+    document.getElementById('searchInput').addEventListener('input', filterArticles);
+  </script>
+
+</body>
+</html>
