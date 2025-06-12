@@ -22,7 +22,7 @@
     }
     .logo {
       position: relative;
-      padding-left: 80px; /* spazio per cerchio con stella */
+      padding-left: 80px; /* spazio per cerchio con immagine */
       font-weight: 900;
       font-size: 3.5rem;
       background: linear-gradient(90deg, #2a33ff, #7a33ff, #ff7f50, #ff6347);
@@ -46,17 +46,19 @@
       top: 10px;
       width: 60px;
       height: 60px;
-      background: linear-gradient(135deg, #ff7f50, #ff6347);
       border-radius: 50%;
+      box-shadow: 0 0 10px #ff6f3f80;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 10px #ff6f3f80;
     }
-    .icon-star svg {
-      width: 30px;
-      height: 30px;
-      fill: white; /* stella bianca */
+    .icon-star img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
     }
     nav a {
       margin: 0 0.5rem;
@@ -173,9 +175,7 @@
       SUPERNOVA
       <div class="subtitle">Personal Astronomy & Astrophysics Journal</div>
       <div class="icon-star">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M12 2l2.39 7.26H22l-5.8 4.22L18.19 22 12 17.77 5.81 22l1.99-8.52L2 9.26h7.61z"/>
-        </svg>
+        <img src="logo.jpg" alt="Logo" />
       </div>
     </div>
     <nav>
@@ -225,10 +225,8 @@
     <i class="fas fa-arrow-up"></i>
   </div>
 
-  <footer style="background:#1c084e; color:#fff; text-align:center; padding:1rem 0; font-size:0.9rem; display:flex; justify-content:center; align-items:center; gap:8px;">
-    © 2025 SUPERNOVA - Personal Astronomy Journal | Exploring the Universe One Discovery at a Time.
-    <i class="fas fa-satellite" aria-hidden="true" style="font-size:1.2rem; color:#ff7f50;"></i>
+  <footer style="background:#1c084e; color:#fff; text-align:center; padding:1rem 2rem;">
+    &copy; 2025 Supernova Journal. All rights reserved.
   </footer>
 </body>
 </html>
-
