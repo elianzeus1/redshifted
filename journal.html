@@ -7,7 +7,6 @@
   <title>Supernova Journal - Articles</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
-    /* Riporto tutto il CSS della homepage, per mantenere lo stile identico */
     body {
       margin: 3;
       font-family: 'Segoe UI', sans-serif;
@@ -48,17 +47,15 @@
       top: 10px;
       width: 60px;
       height: 60px;
-      background: linear-gradient(135deg, #ff7f50, #ff6347);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow: hidden;
       box-shadow: 0 0 10px #ff6f3f80;
     }
-    .icon-star svg {
-      width: 30px;
-      height: 30px;
-      fill: white;
+    .icon-star img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
     }
     nav a {
       margin: 0 0.5rem;
@@ -75,7 +72,6 @@
     nav a:hover {
       background: #5c2bcd;
     }
-    /* Barra di ricerca */
     .search-bar {
       max-width: 600px;
       margin: 2rem auto 3rem;
@@ -145,7 +141,6 @@
       border-radius: 5px;
       font-size: 0.8rem;
     }
-    /* Footer identico */
     footer {
       background:#1c084e; 
       color:#fff; 
@@ -166,9 +161,7 @@
       SUPERNOVA
       <div class="subtitle">Personal Astronomy & Astrophysics Journal</div>
       <div class="icon-star">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M12 2l2.39 7.26H22l-5.8 4.22L18.19 22 12 17.77 5.81 22l1.99-8.52L2 9.26h7.61z"/>
-        </svg>
+        <img src="logo.jpg" alt="Supernova Logo">
       </div>
     </div>
     <nav>
@@ -186,7 +179,6 @@
     </div>
 
     <div class="cards" id="articlesContainer">
-      <!-- Esempio articoli, stesso formato della homepage -->
       <div class="card" data-tags="nebula star formation winter objects">
         <img src="orion.jpg" alt="Orion Nebula" />
         <div class="card-content">
@@ -207,7 +199,6 @@
           </div>
         </div>
       </div>
-      <!-- Puoi aggiungere qui altri articoli nello stesso formato con data-tags -->
     </div>
   </section>
 
@@ -221,7 +212,6 @@
       const input = document.getElementById('searchInput').value.toLowerCase().trim();
       const articles = document.querySelectorAll('#articlesContainer .card');
       if(!input) {
-        // Se input vuoto mostra tutti
         articles.forEach(article => article.style.display = 'block');
         return;
       }
@@ -229,7 +219,6 @@
         const tags = article.getAttribute('data-tags').toLowerCase();
         const title = article.querySelector('h3').textContent.toLowerCase();
         const desc = article.querySelector('p').textContent.toLowerCase();
-        // Controlla se input è contenuto in tags, titolo o descrizione
         if(tags.includes(input) || title.includes(input) || desc.includes(input)) {
           article.style.display = 'block';
         } else {
@@ -238,7 +227,6 @@
       });
     }
 
-    // Permette anche ricerca "live" mentre scrivi (opzionale)
     document.getElementById('searchInput').addEventListener('input', filterArticles);
   </script>
 
