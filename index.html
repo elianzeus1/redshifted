@@ -2,211 +2,437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SUPERNOVA</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #2e004f, #000033);
-      color: white;
-      background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
-      background-size: 40px 40px;
-      overflow-x: hidden;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SUPERNOVA - Personal Astronomy & Astrophysics Journal</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+  /* Reset */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body, html {
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #2f1e56, #0a184e);
+    color: white;
+    overflow-x: hidden;
+  }
+
+  /* Background faint dots */
+  body::before {
+    content: "";
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background:
+      radial-gradient(rgba(255 255 255 / 0.1) 1px, transparent 1px),
+      radial-gradient(rgba(255 255 255 / 0.07) 1px, transparent 1px);
+    background-position: 0 0, 25px 25px;
+    background-size: 50px 50px;
+    pointer-events:none;
+    z-index: 0;
+  }
+
+  /* Container */
+  .container {
+    display: flex;
+    height: 100vh;
+    position: relative;
+    padding: 0 3rem 3rem 3rem;
+  }
+
+  /* Side right header */
+  header {
+    position: fixed;
+    top: 1rem;
+    right: 2rem;
+    text-align: right;
+    z-index: 10;
+    max-width: 300px;
+  }
+
+  /* Gradient SUPERNOVA text */
+  .logo {
+    font-weight: 900;
+    font-size: 3.5rem;
+    background: linear-gradient(90deg, #2a33ff, #7a33ff, #ff7f50, #ff6347);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.2rem;
+    user-select:none;
+  }
+
+  /* Subtitle under logo */
+  .subtitle {
+    font-size: 0.8rem;
+    color: white;
+    opacity: 0.85;
+    font-weight: 400;
+  }
+
+  /* Icon star circle */
+  .icon-star {
+    position: absolute;
+    right: 330px;
+    top: 15px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #ff7f50, #ff6347);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px #ff6f3f80;
+  }
+  .icon-star svg {
+    fill: white;
+    width: 30px;
+    height: 30px;
+  }
+
+  /* Sidebar menu left vertical */
+  nav {
+    position: fixed;
+    top: 50%;
+    left: 2rem;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    z-index: 10;
+  }
+  nav button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  nav button:hover, nav button.active {
+    background: #ff7f50aa;
+  }
+  nav button svg {
+    width: 22px;
+    height: 22px;
+    fill: white;
+    flex-shrink: 0;
+  }
+
+  /* Main content */
+  main {
+    margin: auto;
+    max-width: 900px;
+    padding: 6rem 2rem 3rem 2rem;
+    text-align: center;
+    z-index: 5;
+  }
+  main h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    user-select:none;
+  }
+  main p {
+    font-size: 1.1rem;
+    color: white;
+    opacity: 0.85;
+    margin-bottom: 2rem;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Buttons container */
+  .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 1.6rem;
+    margin-bottom: 3rem;
+  }
+  .btn-gradient-flash {
+    background: linear-gradient(45deg, #ff7f50, #ff6347);
+    color: white;
+    border: none;
+    padding: 0.9rem 2.4rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 35px;
+    cursor: pointer;
+    box-shadow: 0 0 15px #ff7f50;
+    animation: flash 2s infinite alternate;
+    transition: box-shadow 0.3s ease;
+  }
+  .btn-gradient-flash:hover {
+    box-shadow: 0 0 30px #ff4f20;
+  }
+  @keyframes flash {
+    0%, 100% { box-shadow: 0 0 15px #ff7f50; }
+    50% { box-shadow: 0 0 40px #ff7f50; }
+  }
+
+  .btn-secondary {
+    background: none;
+    border: 2px solid white;
+    color: white;
+    padding: 0.9rem 2.4rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 35px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .btn-secondary:hover {
+    background: white;
+    color: #0a184e;
+  }
+
+  /* Articles section */
+  .articles-section {
+    margin-top: 3rem;
+    text-align: left;
+  }
+  .articles-section h2 {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    user-select:none;
+  }
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 1.8rem;
+  }
+  .article-card {
+    background: #161e4fcc;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .article-card:hover {
+    transform: scale(1.05);
+  }
+  .article-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+  }
+  .article-title {
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: white;
+    flex-grow: 1;
+  }
+
+  /* Scroll to top round button */
+  #scrollTopBtn {
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    background: rgba(255, 127, 80, 0.85);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 12px #ff7f50bb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    transition: background-color 0.3s ease;
+  }
+  #scrollTopBtn:hover {
+    background: #ff7f50;
+  }
+  #scrollTopBtn svg {
+    fill: white;
+    width: 22px;
+    height: 22px;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 1.4rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: white;
+    opacity: 0.65;
+    position: fixed;
+    bottom: 0;
+    left: 0; right: 0;
+    background: #0a184e88;
+  }
+
+  /* Search bar for Journal */
+  #searchBar {
+    margin: 1rem auto 2rem auto;
+    max-width: 650px;
+    display: block;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border-radius: 35px;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 8px #7a33ff88 inset;
+    background: #161e4f;
+    color: white;
+  }
+
+  /* Hide sections except Home by default */
+  .page-content {
+    display: none;
+  }
+  .page-content.active {
+    display: block;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    main {
+      padding: 5rem 1rem 3rem 1rem;
     }
     header {
-      position: fixed;
-      top: 0;
-      right: 0;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      z-index: 10;
-    }
-    .logo {
-      background: linear-gradient(to right, #00f, #8a2be2, #ff7f50);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 28px;
-      font-weight: bold;
-      margin-right: 10px;
-    }
-    .subtitle {
-      font-size: 10px;
-      color: white;
+      max-width: 100%;
+      right: 1rem;
+      text-align: center;
+      position: static;
+      margin-bottom: 1rem;
     }
     .icon-star {
-      width: 32px;
-      height: 32px;
-      background-color: #ff7f50;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-left: 10px;
-    }
-    .icon-star i {
-      color: white;
+      position: static;
+      margin: 0 auto 1rem auto;
+      display: block;
     }
     nav {
       position: fixed;
-      top: 80px;
-      right: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      padding: 20px;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .main {
-      text-align: center;
-      margin-top: 120px;
-      padding: 40px;
-    }
-    .main h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-    .main p {
-      font-size: 14px;
-      color: white;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .buttons {
-      margin-top: 40px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-    .btn {
-      padding: 12px 20px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: bold;
-    }
-    .btn-orange {
-      background: linear-gradient(90deg, #ff6600, #ff9966);
-      color: white;
-      animation: blink 1.2s infinite;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
-    }
-    .btn-white {
-      background-color: white;
-      color: #000033;
-    }
-    .articles {
-      margin-top: 60px;
-      padding: 20px;
-    }
-    .articles h2 {
-      font-size: 20px;
-      margin-bottom: 20px;
-    }
-    .article-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-    .article {
-      background-color: rgba(255,255,255,0.05);
-      border-radius: 10px;
-      overflow: hidden;
-      width: 200px;
-      text-align: center;
-    }
-    .article img {
+      top: auto;
+      left: 0;
+      bottom: 0;
       width: 100%;
-      height: 120px;
-      object-fit: cover;
+      background: #0a184edd;
+      flex-direction: row;
+      justify-content: space-around;
+      padding: 0.5rem 0;
+      transform: none;
+      height: 60px;
     }
-    .article-title {
-      padding: 10px;
-      font-size: 14px;
+    nav button {
+      font-size: 0.9rem;
     }
-    .scroll-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #444;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
+    #scrollTopBtn {
+      right: 1rem;
+      bottom: 70px;
     }
-    .scroll-top i {
-      color: white;
-    }
-    footer {
-      margin-top: 80px;
-      text-align: center;
-      font-size: 12px;
-      padding: 20px;
-      color: white;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">SUPERNOVA</div>
-    <div class="subtitle">Personal Astronomy & Astrophysics Journal</div>
-    <div class="icon-star"><i class="fas fa-star"></i></div>
-  </header>
-  <nav>
-    <a href="#"><i class="fas fa-home"></i> Home</a>
-    <a href="#"><i class="fas fa-book"></i> Journal</a>
-    <a href="#"><i class="fas fa-binoculars"></i> Observations</a>
-    <a href="#"><i class="fas fa-flask"></i> Research</a>
-    <a href="#"><i class="fas fa-calendar"></i> Events</a>
-  </nav>
-  <div class="main">
+
+<header>
+  <div class="logo">SUPERNOVA</div>
+  <div class="subtitle">Personal Astronomy & Astrophysics Journal</div>
+</header>
+
+<div class="icon-star" title="SUPERNOVA">
+  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M32 49.6L13 59l5.6-20.7L2 24.6l21.9-1.7L32 3l8.1 19.9 21.9 1.7-16.6 13.7L51 59z"/>
+  </svg>
+</div>
+
+<nav aria-label="Primary navigation">
+  <button id="nav-home" class="active" onclick="navigateTo('home')" title="Home">
+    <svg viewBox="0 0 24 24"><path d="M3 11L12 2l9 9v11a2 2 0 0 1-2 2h-5v-7h-4v7H5a2 2 0 0 1-2-2v-11z"/></svg>
+    Home
+  </button>
+  <button id="nav-journal" onclick="navigateTo('journal')" title="Journal">
+    <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8 8h8v2H8zm0 4h8v2H8z"/></svg>
+    Journal
+  </button>
+  <button id="nav-observations" onclick="navigateTo('observations')" title="Observations">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none"/>
+      <path d="M12 6v6l4 2" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    Observations
+  </button>
+  <button id="nav-research" onclick="navigateTo('research')" title="Research">
+    <svg viewBox="0 0 24 24"><path d="M3 17v-2a5 5 0 0 1 10 0v2h-2v-2a3 3 0 0 0-6 0v2zM16 7h5v2h-5zM16 11h5v2h-5z"/></svg>
+    Research
+  </button>
+</nav>
+
+<main>
+  <!-- Home page content -->
+  <section id="page-home" class="page-content active" role="main" aria-label="Home page">
     <h1>Explore the Cosmos</h1>
     <p>Welcome to my personal journal documenting the wonders of astronomy and astrophysics. Join me on a journey through space and time as we uncover the mysteries of the universe.</p>
-    <div class="buttons">
-      <button class="btn btn-orange" onclick="location.href='#'">Last Entries</button>
-      <button class="btn btn-white" onclick="location.href='#'">Browse Topics</button>
+    <div class="btn-group">
+      <button class="btn-gradient-flash" onclick="navigateTo('journal')">Last Entries</button>
+      <button class="btn-secondary" onclick="navigateTo('observations')">Browse Topics</button>
     </div>
-  </div>
-  <div class="articles">
-    <h2>Recent Discoveries</h2>
-    <div class="article-grid">
-      <div class="article">
-        <img src="https://via.placeholder.com/200x120" alt="Article 1">
-        <div class="article-title">New Galaxy Cluster Detected</div>
+    <section class="articles-section" aria-label="Recent discovery articles">
+      <h2>Recent Discovery</h2>
+      <div class="articles-grid" id="home-articles">
+        <!-- Articles inserted by JS -->
       </div>
-      <div class="article">
-        <img src="https://via.placeholder.com/200x120" alt="Article 2">
-        <div class="article-title">Pulsar Timing Breakthrough</div>
-      </div>
-      <div class="article">
-        <img src="https://via.placeholder.com/200x120" alt="Article 3">
-        <div class="article-title">Dark Matter Map Revealed</div>
-      </div>
+    </section>
+  </section>
+
+  <!-- Journal page content -->
+  <section id="page-journal" class="page-content" role="main" aria-label="Journal entries">
+    <h1>Journal Entries</h1>
+    <input type="search" id="searchBar" placeholder="Search journal entries by title, content or tags..." aria-label="Search journal entries" oninput="filterArticles()"/>
+    <div class="articles-grid" id="journal-articles">
+      <!-- Journal articles inserted by JS -->
     </div>
-  </div>
-  <div class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-    <i class="fas fa-arrow-up"></i>
-  </div>
-  <footer>
-    &copy; 2024 SUPERNOVA - Personal Astronomy Journal | Exploring the Universe One Discovery at a Time.
-  </footer>
-</body>
-</html>
+  </section>
+
+  <!-- Observations page content -->
+  <section id="page-observations" class="page-content" role="main" aria-label="Observational astronomy">
+    <h1>Observational Astronomy</h1>
+    <div class="articles-grid" id="observations-articles">
+      <!-- Observation articles inserted by JS -->
+    </div>
+  </section>
+
+  <!-- Research page content -->
+  <section id="page-research" class="page-content" role="main" aria-label="Research notes">
+    <h1>Research Notes</h1>
+    <div class="articles-grid" id="research-articles">
+      <!-- Research articles inserted by JS -->
+    </div>
+  </section>
+</main>
+
+<button id="scrollTopBtn" aria-label="Scroll to top" onclick="scrollToTop()">
+  <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h6v8h4v-8h6z"/></svg>
+</button>
+
+<footer>
+  © 2024 SUPERNOVA - Personal Astronomy Journal | Exploring the Universe One Discovery at a Time.
+</footer>
+
+<script>
+  // Sample articles data for each section
+  const articles = {
+    home: [
+      {title: "Supernova Remnant Found in Nearby Galaxy", img:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=400&q=80"},
+      {title: "New Exoplanet Discovered in Habitable Zone", img:"https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"},
+      {title: "Dark Matter Clues from Galaxy Clusters", img:"https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400&q=80"},
+      {title: "Black Hole Event Horizon Imaging Advances", img:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=400&q=80"}
+    ],
+    journal: [
+      {title: "Galaxy Evolution Insights from Deep Surveys", img:"https://images.unsplash.com/photo-1470115636492-6d2b56f70b06?auto=format&fit=crop&w=400&q=80", content:"Study on galaxy evolution and star formation."},
+      {title: "Supernova Type Ia as Cosmic Distance Markers", img:"https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?auto=format&fit=crop&w=400&q=80", content:"Observations and calibrations of Type Ia supernovae."},
+      {title: "Astrophysical Jets and Their Origins", img:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto
